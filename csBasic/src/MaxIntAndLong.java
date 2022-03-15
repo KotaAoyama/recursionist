@@ -1,4 +1,4 @@
-public class maxIntAndLong {
+public class MaxIntAndLong {
     public static void main(String[] args) {
         // プログラムの中で整数を扱う際は、Java の中では特に指定がない場合、数値は int 型として扱われました
         // Java では int 型は、32ビット（4 バイト）です

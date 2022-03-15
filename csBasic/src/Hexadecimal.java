@@ -1,4 +1,4 @@
-public class hexadecimal {
+public class Hexadecimal {
     public static void main(String[] args){
         System.out.println(0xb);
         System.out.println(0xff);
