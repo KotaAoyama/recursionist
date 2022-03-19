@@ -1,4 +1,6 @@
-public class Unicode {
+package csBasic.unicode;
+
+public class Main {
     public static void main(String[] args) {
         // コンピュータに文字と認識してもらうために、文字にはシングルクオテーション(')を使います
         // Java では、文字型は 16 ビット（2 バイト）です。つまり 0 から 65535 までの値に各文字を割り振っています

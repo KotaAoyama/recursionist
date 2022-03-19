@@ -1,4 +1,6 @@
-public class Hexadecimal {
+package csBasic.hexadecimal;
+
+public class Main {
     public static void main(String[] args){
         System.out.println(0xb);
         System.out.println(0xff);

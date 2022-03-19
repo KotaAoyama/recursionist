@@ -1,4 +1,6 @@
-public class FloatingPointNumber {
+package csBasic.flaotingPointNumber;
+
+public class Main {
     public static void main(String[] args) {
         // Java では、小数に特に何も指定しない場合は double 型として扱われます
         System.out.println(10.4);

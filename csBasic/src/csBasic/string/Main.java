@@ -1,4 +1,6 @@
-public class String {
+package csBasic.string;
+
+public class Main {
     public static void main(String[] args) {
         // コンピュータに文字と認識してもらうために、文字列にはダブルクオテーション(")を使います
         // 文字列型
