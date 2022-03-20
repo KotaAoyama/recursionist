@@ -9,6 +9,10 @@ public class Main {
         System.out.println(1.23456E-3);
         System.out.println(1.23456E4);
 
+        System.out.println(3.14);
+        System.out.println(Math.round(2E3));
+        System.out.println(5E-2);
+
         // double 型を超える数値
         // コメントアウトを削除して、実行してみましょう。エラーが発生します
         // System.out.println(1.23456E-400);
