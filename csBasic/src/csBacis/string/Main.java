@@ -1,4 +1,4 @@
-package csBasic.string;
+package csBacis.string;
 
 public class Main {
     public static void main(String[] args) {

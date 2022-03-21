@@ -1,4 +1,4 @@
-package csBasic.maxIntAndLong;
+package csBacis.maxIntAndLong;
 
 public class Main {
     public static void main(String[] args) {

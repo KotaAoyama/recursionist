@@ -1,4 +1,4 @@
-package csBasic.hexadecimal;
+package csBacis.hexadecimal;
 
 public class Main {
     public static void main(String[] args){

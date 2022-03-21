@@ -1,4 +1,4 @@
-package csBasic.unicode;
+package csBacis.unicode;
 
 public class Main {
     public static void main(String[] args) {
