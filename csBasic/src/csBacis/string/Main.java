@@ -22,5 +22,23 @@ public class Main {
         System.out.println("Recursion".charAt(0));
         System.out.println("Recursion".charAt(4));
         System.out.println("Recursion".charAt(8));
+
+        // str 型 + str 型
+        // str 型 + char 型でも問題なく動作します
+        System.out.println("Hello" + "World");
+        System.out.println("Hello" + ' ' + "World");
+        System.out.println("S" + '.' + "J");
+
+        // Javaでは、str 型 + number 型 = str 型になります。
+        System.out.println("A" + 234);
+
+        // 注意
+        // char 型　+ char 型 = int 型になります
+        System.out.println('a' + 'b');
+        System.out.println((int)'a');
+        System.out.println((int)'b');
+
+        System.out.println('ぬ' + 'ぬ');
+        System.out.println((int)'ぬ');
     }
 }
