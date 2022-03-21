@@ -1,6 +1,6 @@
 package csBacis.expression;
 
-public class Expression {
+public class Main {
     public static void main(String[] args) {
         // 足し算
         System.out.println(12 + 5);
