@@ -22,6 +22,10 @@ public class Expression {
         System.out.println(12 / 3);
         System.out.println(12.0 / 5.0);
 
+        // Java　や　C++　には、冪乗演算子（**）はない
+        // Python　にのみ、割り切り演算子（//）がある
+        // 12 / 5 は 2.4 だが、12 // 5 は 2
+
         // int 型同士の割り算には十分に注意が必要です
         System.out.println(1 / 30000000);
 
