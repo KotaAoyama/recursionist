@@ -1,4 +1,4 @@
-package csBacis.functionPractice1;
+package csBacis.functionPractice.vacationRental;
 
 public class Main {
     public static int vacationRental(int people, int day){
