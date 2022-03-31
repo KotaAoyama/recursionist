@@ -1,4 +1,4 @@
-package csBacis.functionPractice.functionDecomposition;
+package csMiddle.functionDecomposition;
 
 public class Main {
     public static double stateTax(String state) {
