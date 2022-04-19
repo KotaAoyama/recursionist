@@ -13,7 +13,7 @@ public class Main {
         // ステップを√n回繰り返します。nが素数でないと仮定すると、n = a * bと表すことができるので、aとbの両方が√n 以上になることはありえません。
         // したがって、√n * √n = n は最大合成組み合わせになります。
         for (int currentPrime = 2; currentPrime < Math.ceil(Math.sqrt(n)); currentPrime++){
-            // キャッシュ内の素数(p)の倍数をすべてfalseにしていきます。
+            // キャッシュ内の素数(p)の倍数（約数を持つので素数ではない数）をすべてfalseにしていきます。
             // iは2からスタートします。
             if (!cache[currentPrime]) continue;
             int i = 2;
