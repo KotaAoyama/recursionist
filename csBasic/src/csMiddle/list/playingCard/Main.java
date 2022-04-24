@@ -99,17 +99,30 @@ class Dealer{
         if (gameMode.equals("21")) return 2;
         else return 0;
     }
+
+    public static void printTableInformation(List<List<Card>> playerCards, Table table) {
+        System.out.println("Amount of players: " + table.amountOfPlayers +"... Game mode: " + table.gameMode + ". At this table: ");
+
+        for (int i = 0; i < playerCards.size(); i++) {
+            System.out.println("Player " + (i + 1) + " hand is: ");
+            for (int j = 0; j < playerCards.get(i).size(); j++) {
+                System.out.println(playerCards.get(i).get(j).getCardString());
+            }
+            System.out.println();
+        }
+    }
 }
 
 public class Main{
 
     public static void main(String[] args){
 
-        Table table1 = new Table(2, "poker");
+        Table table1 = new Table(2, "21");
         List<List<Card>> game1 = Dealer.startGame(table1);
-        // 1人目のplayerの手札をfor文で出力してみます。
-        for (int i = 0; i < game1.get(0).size(); i++) {
-            System.out.println(game1.get(0).get(i).getCardString());
-        }
+        Dealer.printTableInformation(game1, table1);
+
+        Table table2 = new Table(4, "poker");
+        List<List<Card>> game2 = Dealer.startGame(table2);
+        Dealer.printTableInformation(game2, table2);
     }
 }
