@@ -1,11 +1,12 @@
 package csMiddle.list.playingCard;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class Card{
-    private String suit;
-    private String value;
-    private int intValue;
+    private final String suit;
+    private final String value;
+    private final int intValue;
 
     public Card(String suit, String value, int intValue){
         this.suit = suit;
@@ -18,6 +19,7 @@ class Card{
     }
 
 }
+
 class Deck{
     public ArrayList<Card> deck;
 
@@ -25,7 +27,7 @@ class Deck{
         this.deck = generateDeck();
     }
 
-    public static ArrayList<Card> generateDeck(){
+    public ArrayList<Card> generateDeck(){
         ArrayList<Card> newDeck = new ArrayList<>();
         String[] suits = new String[]{"♣", "♦", "♥", "♠"};
         String[] values = new String[]{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
@@ -61,15 +63,35 @@ class Deck{
     }
 }
 
+class Dealer{
+    public static List<List<Card>> startGame(int amountOfPlayers) {
+        //新しいデッキを作ります
+        Deck deck = new Deck();
+        //デッキをシャッフルします
+        deck.shuffleDeck();
+        List<List<Card>> table = new ArrayList<>();
+        // プレーヤの手札
+        for (int i = 0; i < amountOfPlayers; i++) {
+            List<Card> playerHand = new ArrayList<Card>(2);//ブラックジャックの手札は２枚
+            for (int j = 0; j < 2; j++) {
+                Card card1 = deck.draw();
+                playerHand.add(card1);
+            }
+            table.add(playerHand);
+        }
+        // tableのプレイヤー全員の手札を返します。
+        return table;
+    }
+}
+
 public class Main{
 
     public static void main(String[] args){
 
-        Deck deck1 = new Deck();
-
-        deck1.shuffleDeck();
-
-        System.out.println(deck1.deck.size() - 1);
-        System.out.println(deck1.draw().getCardString());
+        List<List<Card>> table1 = Dealer.startGame(4);
+        // 1人目のplayerの手札をfor文で出力してみます。
+        for (Card card: table1.get(0)) {
+            System.out.println(card.getCardString());
+        }
     }
 }
