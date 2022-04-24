@@ -63,24 +63,41 @@ class Deck{
     }
 }
 
+//他のゲームにも対応できるよう、プレイヤーの人数とgameModeを記録するTableクラスを作成します。
+class Table{
+    public int amountOfPlayers;
+    public String gameMode;
+
+    public Table(int amountOfPlayers, String gameMode){
+        this.amountOfPlayers = amountOfPlayers;
+        this.gameMode = gameMode;
+    }
+}
+
 class Dealer{
-    public static List<List<Card>> startGame(int amountOfPlayers) {
-        //新しいデッキを作ります
+    public static List<List<Card>> startGame(Table table) {
+
         Deck deck = new Deck();
-        //デッキをシャッフルします
         deck.shuffleDeck();
-        List<List<Card>> table = new ArrayList<>();
-        // プレーヤの手札
-        for (int i = 0; i < amountOfPlayers; i++) {
-            List<Card> playerHand = new ArrayList<Card>(2);//ブラックジャックの手札は２枚
-            for (int j = 0; j < 2; j++) {
+
+        List<List<Card>> playerCards = new ArrayList<>();
+
+        for (int i = 0; i < table.amountOfPlayers; i++) {
+            List<Card> playerHand = new ArrayList<Card>(Dealer.initialCards(table.gameMode));
+            for (int j = 0; j < Dealer.initialCards(table.gameMode); j++) {
                 Card card1 = deck.draw();
                 playerHand.add(card1);
             }
-            table.add(playerHand);
+            playerCards.add(playerHand);
         }
-        // tableのプレイヤー全員の手札を返します。
-        return table;
+
+        return playerCards;
+    }
+
+    public static int initialCards(String gameMode) {
+        if (gameMode.equals("poker")) return 5;
+        if (gameMode.equals("21")) return 2;
+        else return 0;
     }
 }
 
@@ -88,10 +105,11 @@ public class Main{
 
     public static void main(String[] args){
 
-        List<List<Card>> table1 = Dealer.startGame(4);
+        Table table1 = new Table(2, "poker");
+        List<List<Card>> game1 = Dealer.startGame(table1);
         // 1人目のplayerの手札をfor文で出力してみます。
-        for (Card card: table1.get(0)) {
-            System.out.println(card.getCardString());
+        for (int i = 0; i < game1.get(0).size(); i++) {
+            System.out.println(game1.get(0).get(i).getCardString());
         }
     }
 }
