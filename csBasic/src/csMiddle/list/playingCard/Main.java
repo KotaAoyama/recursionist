@@ -14,6 +14,18 @@ class Card{
         this.intValue = intValue;
     }
 
+    public String getSuit() {
+        return suit;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public int getIntValue() {
+        return intValue;
+    }
+
     public String getCardString(){
         return this.suit + this.value + "(" + this.intValue + ")";
     }
@@ -111,18 +123,45 @@ class Dealer{
             System.out.println();
         }
     }
+
+    public static int score21Individual(List<Card> cards) {
+        int value = 0;
+        for (Card card : cards) {
+            value += card.getIntValue();
+        }
+        if (value > 21) value = 0;
+        return value;
+    }
 }
 
 public class Main{
 
     public static void main(String[] args){
 
-        Table table1 = new Table(2, "21");
-        List<List<Card>> game1 = Dealer.startGame(table1);
-        Dealer.printTableInformation(game1, table1);
+        List<Card> playerA = new ArrayList<>(2);
 
-        Table table2 = new Table(4, "poker");
-        List<List<Card>> game2 = Dealer.startGame(table2);
-        Dealer.printTableInformation(game2, table2);
+        Card card1 = new Card("♦︎","A", 1);
+        Card card2 = new Card("♦︎","J", 11);
+
+        playerA.add(card1);
+        playerA.add(card2);
+
+        List<Card> playerB = new ArrayList<>(2);
+        Card card3 = new Card("♦︎","9", 9);
+        Card card4 = new Card("♦︎","K", 13);
+
+        playerB.add(card3);
+        playerB.add(card4);
+
+        System.out.println(Dealer.score21Individual(playerA));
+        System.out.println(Dealer.score21Individual(playerB));
+
+//        Table table1 = new Table(2, "21");
+//        List<List<Card>> game1 = Dealer.startGame(table1);
+//        Dealer.printTableInformation(game1, table1);
+//
+//        Table table2 = new Table(4, "poker");
+//        List<List<Card>> game2 = Dealer.startGame(table2);
+//        Dealer.printTableInformation(game2, table2);
     }
 }
