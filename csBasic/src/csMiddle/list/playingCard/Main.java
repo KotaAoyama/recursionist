@@ -1,7 +1,9 @@
 package csMiddle.list.playingCard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class Card{
     private final String suit;
@@ -132,6 +134,26 @@ class Dealer{
         if (value > 21) value = 0;
         return value;
     }
+
+    public static String winnerOf21(List<List<Card>> playerCards) {
+
+        int[] points = new int[playerCards.size()];
+        Map<Integer, Integer> cache = new HashMap<>();
+
+        for (int i = 0; i < playerCards.size(); i++) {
+            int point = score21Individual(playerCards.get(i));
+            points[i] = point;
+
+            if (cache.get(point) == null) cache.put(point,1);
+            else cache.replace(point, cache.get(point)+1);
+        }
+
+        int winnerIndex = HelperFunctions.maxInArrayIndex(points);
+        if (cache.get(points[winnerIndex]) > 1) return "It is a draw ";
+        else if (cache.get(points[winnerIndex]) >= 0) return "player " + (winnerIndex + 1) + " is the winner";
+        else return "No winners..";
+        
+    }
 }
 
 class HelperFunctions{
@@ -153,11 +175,12 @@ public class Main{
 
     public static void main(String[] args){
 
-        int[] arr1 = new int[]{1,9,19,3,4,6};
-        System.out.println(HelperFunctions.maxInArrayIndex(arr1));
+        Table table1 = new Table(4, "21");
+        List<List<Card>> game1 = Dealer.startGame(table1);
+        Dealer.printTableInformation(game1, table1);
 
-        int[] arr2 = new int[]{5,2,1,3,5,5};
-        System.out.println(HelperFunctions.maxInArrayIndex(arr2));
+        System.out.println(Dealer.winnerOf21(game1));
+
 
 //        List<Card> playerA = new ArrayList<>(2);
 //
