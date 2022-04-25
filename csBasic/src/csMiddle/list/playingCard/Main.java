@@ -134,27 +134,51 @@ class Dealer{
     }
 }
 
+class HelperFunctions{
+    public static int maxInArrayIndex(int[] intArr) {
+        int maxIndex = 0;
+        int maxValue = intArr[0];
+
+        for (int i = 1; i < intArr.length; i++) {
+            if (intArr[i] > maxValue) {
+                maxIndex = i;
+                maxValue = intArr[i];
+            }
+        }
+        return maxIndex;
+    }
+}
+
 public class Main{
 
     public static void main(String[] args){
 
-        List<Card> playerA = new ArrayList<>(2);
+        int[] arr1 = new int[]{1,9,19,3,4,6};
+        System.out.println(HelperFunctions.maxInArrayIndex(arr1));
 
-        Card card1 = new Card("♦︎","A", 1);
-        Card card2 = new Card("♦︎","J", 11);
+        int[] arr2 = new int[]{5,2,1,3,5,5};
+        System.out.println(HelperFunctions.maxInArrayIndex(arr2));
 
-        playerA.add(card1);
-        playerA.add(card2);
+//        List<Card> playerA = new ArrayList<>(2);
+//
+//        Card card1 = new Card("♦︎","A", 1);
+//        Card card2 = new Card("♦︎","J", 11);
+//
+//        playerA.add(card1);
+//        playerA.add(card2);
+//
+//        List<Card> playerB = new ArrayList<>(2);
+//        Card card3 = new Card("♦︎","9", 9);
+//        Card card4 = new Card("♦︎","K", 13);
+//
+//        playerB.add(card3);
+//        playerB.add(card4);
+//
+//        System.out.println(Dealer.score21Individual(playerA));
+//        System.out.println(Dealer.score21Individual(playerB));
 
-        List<Card> playerB = new ArrayList<>(2);
-        Card card3 = new Card("♦︎","9", 9);
-        Card card4 = new Card("♦︎","K", 13);
 
-        playerB.add(card3);
-        playerB.add(card4);
 
-        System.out.println(Dealer.score21Individual(playerA));
-        System.out.println(Dealer.score21Individual(playerB));
 
 //        Table table1 = new Table(2, "21");
 //        List<List<Card>> game1 = Dealer.startGame(table1);
