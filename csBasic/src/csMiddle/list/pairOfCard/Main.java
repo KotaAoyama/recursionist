@@ -26,39 +26,26 @@ public class Main {
 
         for (int i = 0; i < player1.length; i++) {
 
-            int[] player1CountArray = getCountArray(player1Map);
-            int player1MaxCount = 0;
-            int player1MaxIndex = 0;
-            for (int j = 0; j < player1CountArray.length; j++) {
-                if (player1MaxCount <= player1CountArray[j]) {
-                    player1MaxCount = player1CountArray[j];
-                    player1MaxIndex = j;
-                }
-            }
+            Map<String, Integer> player1MaxMap = getMaxMap(getCountArray(player1Map));
+            Map<String, Integer> player2MaxMap = getMaxMap(getCountArray(player2Map));
+            int maxCount1 = player1MaxMap.get("maxCount");
+            int maxCount2 = player2MaxMap.get("maxCount");
+            int maxIndex1 = player1MaxMap.get("maxIndex");
+            int maxIndex2 = player2MaxMap.get("maxIndex");
 
-            int[] player2CountArray = getCountArray(player2Map);
-            int player2MaxCount = 0;
-            int player2MaxIndex = 0;
-            for (int j = 0; j < player2CountArray.length; j++) {
-                if (player2MaxCount <= player2CountArray[j]) {
-                    player2MaxCount = player2CountArray[j];
-                    player2MaxIndex = j;
-                }
-            }
-
-            if (player1MaxCount > player2MaxCount) return "player1";
-            if (player2MaxCount > player1MaxCount) return "player2";
-            if (player1MaxIndex > player2MaxIndex) return "player1";
-            if (player2MaxIndex > player1MaxIndex) return "player2";
+            if (maxCount1 > maxCount2) return "player1";
+            if (maxCount2 > maxCount1) return "player2";
+            if (maxIndex1 > maxIndex2) return "player1";
+            if (maxIndex2 > maxIndex1) return "player2";
 
             for (int j = 0; j < 13; j++) {
-                if (player1MaxIndex == j) {
+                if (maxIndex1 == j) {
                     player1Map.remove(cardStrength[j]);
                     break;
                 }
             }
             for (int j = 0; j < 13; j++) {
-                if (player2MaxIndex == j) {
+                if (maxIndex2 == j) {
                     player2Map.remove(cardStrength[j]);
                     break;
                 }
@@ -75,6 +62,23 @@ public class Main {
         }
 
         return countArray;
+    }
+
+    private static Map<String, Integer> getMaxMap(int[] countArr) {
+        Map<String, Integer> maxMap = new HashMap<>();
+        int maxCount = 0;
+        int maxIndex = 0;
+        for (int j = 0; j < countArr.length; j++) {
+            if (maxCount <= countArr[j]) {
+                maxCount = countArr[j];
+                maxIndex = j;
+            }
+        }
+
+        maxMap.put("maxCount", maxCount);
+        maxMap.put("maxIndex", maxIndex);
+
+        return maxMap;
     }
 
     public static void main(String[] args) {
