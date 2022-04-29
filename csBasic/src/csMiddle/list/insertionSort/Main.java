@@ -1,4 +1,4 @@
-package csMiddle.list.insersionSort;
+package csMiddle.list.insertionSort;
 
 import java.util.Arrays;
 
