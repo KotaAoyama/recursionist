@@ -75,8 +75,5 @@ const employeeObj1 = new Employee("Kaiden", "Herman", "Software Engineer", "C++,
 const employeeObj2 = new Employee("Elizabeth", "Dunn", "Accountant", "Excel, Word, Quickbooks", "England", "https://randomuser.me/api/portraits/women/76.jpg");
 const employeeObj3 = new Employee("Duan" ,"Moreno", "Teacher", "Working with children, History, Word", "Argentina", "https://randomuser.me/api/portraits/med/men/93.jpg");
 
-profileDiv.append(createEmployeeCard(employeeObj1));
-profileDiv.append(createEmployeeCard(employeeObj2));
-profileDiv.append(createEmployeeCard(employeeObj3));
-
-
+const employeeObjectArray = [employeeObj1, employeeObj2, employeeObj3];
+employeeObjectArray.forEach(obj => profileDiv.append(createEmployeeCard(obj)));
