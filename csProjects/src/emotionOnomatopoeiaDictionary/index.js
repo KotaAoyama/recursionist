@@ -1,7 +1,7 @@
 class Word{
-    constructor(word, defintion, pictureUrl){
+    constructor(word, definition, pictureUrl){
         this.word = word;
-        this.defintion = defintion;
+        this.defintion = definition;
         this.pictureUrl = pictureUrl;
     }
 }
@@ -16,7 +16,7 @@ class EmotionObject{
     }
 
     getOnomatopoeiaWords(){
-        return this.onomatopoeia;
+        return this.onomatopoeia.map(word => new Word(word, dictionary[word], pictureDictionary[word]));
     }
 
     getHtmlContainerString(){
@@ -91,23 +91,45 @@ const emotions = [
     new EmotionObject("disgusted", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"], "😒")
 ];
 
+function getEmotionNavHtmlString(emotions) {
+    let emotionPanels = "<div>";
+    emotions.forEach(emotionObj => {
+        emotionPanels += `
+            <div class="expandLink col-12 p-4 m-4 text-center" style="background: ${emotionObj.color}">
+                <a href="#${emotionObj.emotion}"></a>
+                <h3 class="text-white">${emotionObj.emotion}</h3>
+                <h1>${emotionObj.emoji}</h1>
+                <p>${emotionObj.description}</p>
+            </div>
+        `;
+    });
+    emotionPanels += "</div>";
 
-const container = document.createElement("div");
-container.classList.add("container", "d-flex", "justify-content-center", "flex-wrap");
+    return emotionPanels;
+}
+
+function getEmotionAreasHtmlString(emotions) {
+    const container = document.createElement("div");
+
+
+
+
+
+
+    container.innerHTML = undefined;
+
+    return container;
+}
+
 const target = document.getElementById("target");
-target.append(container);
 
+const container1 = document.createElement("div");
+container1.classList.add("container", "d-flex", "justify-content-center", "flex-wrap");
+container1.innerHTML = getEmotionNavHtmlString(emotions);
 
-let emotionPanels = "<div>";
-emotions.forEach(emotionObj => {
-    emotionPanels += `
-        <div class="expandLink col-12 p-4 m-4 text-center" style="background: ${emotionObj.color}">
-            <a href="#${emotionObj.emotion}"></a>
-            <h3 class="text-white">${emotionObj.emotion}</h3>
-            <h1>${emotionObj.emoji}</h1>
-            <p>${emotionObj.description}</p>
-        </div>
-    `
-});
-emotionPanels += "</div>";
-container.innerHTML = emotionPanels;
+const container2 = document.createElement("div");
+container2.classList.add("container");
+container2.innerHTML = getEmotionAreasHtmlString(emotions);
+
+target.append(container1);
+target.append(container2);
