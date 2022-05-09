@@ -7,15 +7,16 @@ class Word{
 }
 
 class EmotionObject{
-    constructor(emotion, description, color, onomatopoeia){
+    constructor(emotion, description, color, onomatopoeia, emoji){
         this.emotion = emotion;
         this.description = description;
         this.color = color;
         this.onomatopoeia = onomatopoeia;
+        this.emoji = emoji;
     }
 
     getOnomatopoeiaWords(){
-
+        return this.onomatopoeia;
     }
 
     getHtmlContainerString(){
@@ -81,11 +82,32 @@ const pictureDictionary = {
 };
 
 const emotions = [
-    new EmotionObject("angry", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "red", ["bark","grunt", "roar","whack","smack","hiss"]),
-    new EmotionObject("happy", "feeling or showing pleasure or contentment.", "yellow", ["bling","chatter","chant","giggle"]),
-    new EmotionObject("bad", "not such as to be hoped for or desired; unpleasant or unwelcome.", "beige", ["ahem","clatter","clunk"]),
-    new EmotionObject("sad", "feeling or showing sorrow; unhappy.", "grey", ["bawl","whine","waah"]),
-    new EmotionObject("surprised", "to feel mild astonishment or shock.", "purple", ["boom","honk","zing"]),
-    new EmotionObject("fearful", "feeling afraid; showing fear or anxiety.", "green", ["buzz","caw","crawl"]),
-    new EmotionObject("disgusted", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"])
+    new EmotionObject("angry", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "red", ["bark","grunt", "roar","whack","smack","hiss"], "😠"),
+    new EmotionObject("happy", "feeling or showing pleasure or contentment.", "pink", ["bling","chatter","chant","giggle"], "🥳"),
+    new EmotionObject("bad", "not such as to be hoped for or desired; unpleasant or unwelcome.", "beige", ["ahem","clatter","clunk"], "😰"),
+    new EmotionObject("sad", "feeling or showing sorrow; unhappy.", "grey", ["bawl","whine","waah"], "🥺"),
+    new EmotionObject("surprised", "to feel mild astonishment or shock.", "purple", ["boom","honk","zing"], "😲"),
+    new EmotionObject("fearful", "feeling afraid; showing fear or anxiety.", "green", ["buzz","caw","crawl"], "😖"),
+    new EmotionObject("disgusted", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"], "😒")
 ];
+
+
+const container = document.createElement("div");
+container.classList.add("container", "d-flex", "justify-content-center", "flex-wrap");
+const target = document.getElementById("target");
+target.append(container);
+
+
+let emotionPanels = "<div>";
+emotions.forEach(emotionObj => {
+    emotionPanels += `
+        <div class="expandLink col-12 p-4 m-4 text-center" style="background: ${emotionObj.color}">
+            <a href="#${emotionObj.emotion}"></a>
+            <h3 class="text-white">${emotionObj.emotion}</h3>
+            <h1>${emotionObj.emoji}</h1>
+            <p>${emotionObj.description}</p>
+        </div>
+    `
+});
+emotionPanels += "</div>";
+container.innerHTML = emotionPanels;
