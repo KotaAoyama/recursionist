@@ -1,7 +1,5 @@
 .imgFit {
     object-fit: contain;
-    /*width: 100px;*/
-    /*height: 100px;*/
 }
 
 .expandLink {
@@ -18,11 +16,3 @@
     height: 100%;
     text-indent:-999px;
 }
-
-/*.text-white {*/
-/*    color: white;*/
-/*}*/
-
-/*.bg-white {*/
-/*    background-color: white;*/
-/*}*/

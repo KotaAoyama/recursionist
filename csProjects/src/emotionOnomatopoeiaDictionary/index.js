@@ -19,9 +19,6 @@ class EmotionObject{
         return this.onomatopoeia.map(word => new Word(word, dictionary[word], pictureDictionary[word]));
     }
 
-    getHtmlContainerString(){
-
-    }
 }
 
 //グローバル定数
@@ -114,72 +111,89 @@ function getEmotionNav(emotions) {
         p.classList.add("text-white");
         p.innerText = emotionObj.description;
 
-        expandLinkDiv.append(a);
-        expandLinkDiv.append(h3);
-        expandLinkDiv.append(h1);
-        expandLinkDiv.append(p);
+        expandLinkDiv.append(a, h3, h1, p);
         containerDiv.append(expandLinkDiv);
-    });
 
-    console.log(containerDiv);
+    });
 
     return containerDiv;
 }
 
-function getWordListHtmlString(emotionObj) {
+function getWords(emotionObj) {
 
     const wordObjArr = emotionObj.getOnomatopoeiaWords();
 
-    let wordCardList = "";
+    const outerDiv = document.createElement("div");
+
     wordObjArr.forEach(wordObj => {
-        wordCardList += `
-                <div class="d-flex col-12 col-md-6 bg-white my-4 px-0">
-                    <div class="col-8">
-                        <h4 class="pt-3">${wordObj.word}</h4>
-                        <p class="pt-2">${wordObj.definition}</p>
-                    </div>
-                    <div class="col-4 px-0 d-flex justify-content-center align-items-center">
-                        <img class="imgFit col-12 p-1" src="${wordObj.pictureUrl}"
-                    </div>
-                </div>
-            `;
+        const whiteDiv = document.createElement("div");
+        whiteDiv.classList.add("d-flex", "col-12", "col-md-5", "bg-white", "my-2", "px-0");
+
+        const col8Div = document.createElement("div");
+        col8Div.classList.add("col-8");
+
+        const h4 = document.createElement("h4");
+        h4.classList.add("pt-3");
+        h4.innerText = wordObj.word;
+
+        const p = document.createElement("p");
+        p.classList.add("pt-2");
+        p.innerText = wordObj.definition;
+
+        const col4Div = document.createElement("div");
+        col4Div.classList.add("col-4", "px-0", "d-flex", "justify-content-center", "align-items-center");
+
+        const img = document.createElement("img");
+        img.classList.add("imgFit", "col-12", "p-1");
+        img.src = wordObj.pictureUrl;
+
+        col8Div.append(h4, p);
+        col4Div.append(img);
+        whiteDiv.append(col8Div, col4Div);
+
+        outerDiv.append(whiteDiv);
+
     })
 
-    return wordCardList;
+    return outerDiv;
 }
 
-function getEmotionCategoriesHtmlString(emotions) {
+function getEmotionCategories(emotions) {
 
-    let htmlString = "<div>";
+    const outerDiv = document.createElement("div");
+
     emotions.forEach(emotionObj => {
-        htmlString += `
-            <div id="${emotionObj.emotion}" style="background: ${emotionObj.color}">
-                <div class="container py-3">
-                    <div class="p-3 text-white">
-                        <h2>${emotionObj.emotion}</h2>
-                        <p>${emotionObj.description}</p>                                    
-                    </div>
-                    <div class="d-flex justify-content-between flex-wrap">
-                        <div>
-                            ${getWordListHtmlString(emotionObj)}                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-    htmlString += "</div>";
+        const colorDiv = document.createElement("div");
+        colorDiv.style.backgroundColor = emotionObj.color;
+        colorDiv.id = emotionObj.emotion;
 
-    return htmlString;
+        const containerDiv = document.createElement("div");
+        containerDiv.classList.add("container", "py-3");
+
+        const emotionHeaderDiv = document.createElement("div");
+        emotionHeaderDiv.classList.add("p-3", "text-white");
+
+        const h2 = document.createElement("h2");
+        h2.innerText = emotionObj.emotion;
+
+        const p = document.createElement("p");
+        p.innerText = emotionObj.description;
+
+        const flexDiv = document.createElement("div");
+        flexDiv.classList.add("d-flex", "justify-content-between", "flex-wrap");
+
+        emotionHeaderDiv.append(h2, p);
+        flexDiv.append(getWords(emotionObj));
+        containerDiv.append(emotionHeaderDiv, flexDiv);
+        colorDiv.append(containerDiv);
+
+        outerDiv.append(colorDiv);
+
+    });
+
+    return outerDiv;
 }
 
 const target = document.getElementById("target");
-
 target.append(getEmotionNav(emotions));
-
-// const container2 = document.createElement("div");
-// container2.classList.add("container");
-// container2.innerHTML = getEmotionCategoriesHtmlString(emotions);
-//
-// target.append(container2);
-// console.log(getEmotionCategoriesHtmlString(emotions));
+target.append(getEmotionCategories(emotions));
