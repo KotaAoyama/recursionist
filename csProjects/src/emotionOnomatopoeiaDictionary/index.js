@@ -1,7 +1,7 @@
 class Word{
     constructor(word, definition, pictureUrl){
         this.word = word;
-        this.defintion = definition;
+        this.definition = definition;
         this.pictureUrl = pictureUrl;
     }
 }
@@ -84,52 +84,102 @@ const pictureDictionary = {
 const emotions = [
     new EmotionObject("angry", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "red", ["bark","grunt", "roar","whack","smack","hiss"], "😠"),
     new EmotionObject("happy", "feeling or showing pleasure or contentment.", "pink", ["bling","chatter","chant","giggle"], "🥳"),
-    new EmotionObject("bad", "not such as to be hoped for or desired; unpleasant or unwelcome.", "beige", ["ahem","clatter","clunk"], "😰"),
+    new EmotionObject("bad", "not such as to be hoped for or desired; unpleasant or unwelcome.", "lightblue", ["ahem","clatter","clunk"], "😰"),
     new EmotionObject("sad", "feeling or showing sorrow; unhappy.", "grey", ["bawl","whine","waah"], "🥺"),
     new EmotionObject("surprised", "to feel mild astonishment or shock.", "purple", ["boom","honk","zing"], "😲"),
     new EmotionObject("fearful", "feeling afraid; showing fear or anxiety.", "green", ["buzz","caw","crawl"], "😖"),
     new EmotionObject("disgusted", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"], "😒")
 ];
 
-function getEmotionNavHtmlString(emotions) {
-    let emotionPanels = "<div>";
+function getEmotionNav(emotions) {
+    const containerDiv = document.createElement("div");
+    containerDiv.classList.add("container", "d-flex", "justify-content-center", "flex-wrap");
+
     emotions.forEach(emotionObj => {
-        emotionPanels += `
-            <div class="expandLink col-12 p-4 m-4 text-center" style="background: ${emotionObj.color}">
-                <a href="#${emotionObj.emotion}"></a>
-                <h3 class="text-white">${emotionObj.emotion}</h3>
-                <h1>${emotionObj.emoji}</h1>
-                <p>${emotionObj.description}</p>
+        const expandLinkDiv = document.createElement("div");
+        expandLinkDiv.classList.add("expandLink", "col-12", "p-4", "m-4", "text-center");
+        expandLinkDiv.style.backgroundColor = emotionObj.color;
+
+        const a = document.createElement("a");
+        a.href = `#${emotionObj.emotion}`;
+
+        const h3 = document.createElement("h3");
+        h3.classList.add("text-white");
+        h3.innerText = emotionObj.emotion;
+
+        const h1 = document.createElement("h1");
+        h1.innerText = emotionObj.emoji;
+
+        const p = document.createElement("p");
+        p.classList.add("text-white");
+        p.innerText = emotionObj.description;
+
+        expandLinkDiv.append(a);
+        expandLinkDiv.append(h3);
+        expandLinkDiv.append(h1);
+        expandLinkDiv.append(p);
+        containerDiv.append(expandLinkDiv);
+    });
+
+    console.log(containerDiv);
+
+    return containerDiv;
+}
+
+function getWordListHtmlString(emotionObj) {
+
+    const wordObjArr = emotionObj.getOnomatopoeiaWords();
+
+    let wordCardList = "";
+    wordObjArr.forEach(wordObj => {
+        wordCardList += `
+                <div class="d-flex col-12 col-md-6 bg-white my-4 px-0">
+                    <div class="col-8">
+                        <h4 class="pt-3">${wordObj.word}</h4>
+                        <p class="pt-2">${wordObj.definition}</p>
+                    </div>
+                    <div class="col-4 px-0 d-flex justify-content-center align-items-center">
+                        <img class="imgFit col-12 p-1" src="${wordObj.pictureUrl}"
+                    </div>
+                </div>
+            `;
+    })
+
+    return wordCardList;
+}
+
+function getEmotionCategoriesHtmlString(emotions) {
+
+    let htmlString = "<div>";
+    emotions.forEach(emotionObj => {
+        htmlString += `
+            <div id="${emotionObj.emotion}" style="background: ${emotionObj.color}">
+                <div class="container py-3">
+                    <div class="p-3 text-white">
+                        <h2>${emotionObj.emotion}</h2>
+                        <p>${emotionObj.description}</p>                                    
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div>
+                            ${getWordListHtmlString(emotionObj)}                        
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
     });
-    emotionPanels += "</div>";
+    htmlString += "</div>";
 
-    return emotionPanels;
-}
-
-function getEmotionAreasHtmlString(emotions) {
-    const container = document.createElement("div");
-
-
-
-
-
-
-    container.innerHTML = undefined;
-
-    return container;
+    return htmlString;
 }
 
 const target = document.getElementById("target");
 
-const container1 = document.createElement("div");
-container1.classList.add("container", "d-flex", "justify-content-center", "flex-wrap");
-container1.innerHTML = getEmotionNavHtmlString(emotions);
+target.append(getEmotionNav(emotions));
 
-const container2 = document.createElement("div");
-container2.classList.add("container");
-container2.innerHTML = getEmotionAreasHtmlString(emotions);
-
-target.append(container1);
-target.append(container2);
+// const container2 = document.createElement("div");
+// container2.classList.add("container");
+// container2.innerHTML = getEmotionCategoriesHtmlString(emotions);
+//
+// target.append(container2);
+// console.log(getEmotionCategoriesHtmlString(emotions));
