@@ -97,7 +97,7 @@ function getEmotionNav(emotions) {
 
     emotions.forEach(emotionObj => {
         const expandLinkDiv = document.createElement("div");
-        expandLinkDiv.classList.add("expandLink", "col-12", "p-4", "m-4", "text-center");
+        expandLinkDiv.classList.add("expandLink", "col-12", "col-md-6", "col-lg-3", "p-4", "m-4", "text-center");
         expandLinkDiv.style.backgroundColor = emotionObj.color;
 
         const a = document.createElement("a");
