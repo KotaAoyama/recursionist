@@ -123,7 +123,8 @@ function getWords(emotionObj) {
 
     const wordObjArr = emotionObj.getOnomatopoeiaWords();
 
-    const outerDiv = document.createElement("div");
+    const flexDiv = document.createElement("div");
+    flexDiv.classList.add("d-flex", "justify-content-between", "flex-wrap");
 
     wordObjArr.forEach(wordObj => {
         const whiteDiv = document.createElement("div");
@@ -151,11 +152,11 @@ function getWords(emotionObj) {
         col4Div.append(img);
         whiteDiv.append(col8Div, col4Div);
 
-        outerDiv.append(whiteDiv);
+        flexDiv.append(whiteDiv);
 
     })
 
-    return outerDiv;
+    return flexDiv;
 }
 
 function getEmotionCategories(emotions) {
@@ -179,12 +180,8 @@ function getEmotionCategories(emotions) {
         const p = document.createElement("p");
         p.innerText = emotionObj.description;
 
-        const flexDiv = document.createElement("div");
-        flexDiv.classList.add("d-flex", "justify-content-between", "flex-wrap");
-
         emotionHeaderDiv.append(h2, p);
-        flexDiv.append(getWords(emotionObj));
-        containerDiv.append(emotionHeaderDiv, flexDiv);
+        containerDiv.append(emotionHeaderDiv, getWords(emotionObj));
         colorDiv.append(containerDiv);
 
         outerDiv.append(colorDiv);
