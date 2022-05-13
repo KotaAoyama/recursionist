@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            /* Prevent the user selecting text in the example */
+            user-select: none;
+        }
+
+        #draggable {
+            width: 200px;
+            height: 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .dropzone {
+            width: 200px;
+            height: 20px;
+            background: blueviolet;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dropzone">
+        <div id="draggable" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)">
+            This div is draggable
+        </div>
+    </div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+    <div class="dropzone"></div>
+
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
