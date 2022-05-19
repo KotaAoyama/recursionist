@@ -21,10 +21,12 @@ controls.classList.add("offset-5", "mt-2");
 const leftBtn = document.createElement("button");
 leftBtn.classList.add("btn", "btn-light");
 leftBtn.innerHTML = "<";
+leftBtn.addEventListener("click", () => slideJump(-1));
 
 const rightBtn = document.createElement("button");
 rightBtn.classList.add("btn", "btn-light");
 rightBtn.innerHTML = ">";
+rightBtn.addEventListener("click", () => slideJump(1));
 
 controls.append(leftBtn);
 controls.append(rightBtn);
@@ -44,6 +46,8 @@ function slideJump(steps) {
     const nextElement = sliderItems.item(index);
 
     main.setAttribute("data-index", index.toString());
+
+    animateMain(currentElement, nextElement, steps === 1 ? "right" : "left");
 }
 
 function animateMain(currentElement, nextElement, animationType) {
@@ -66,6 +70,3 @@ function animateMain(currentElement, nextElement, animationType) {
         sliderShow.append(extra);
     }
 }
-
-animateMain(sliderItems[2], sliderItems[3], "right");
-// animateMain(sliderItems[0], sliderItems[4], "left");
