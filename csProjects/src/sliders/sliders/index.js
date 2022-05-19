@@ -5,7 +5,7 @@ const sliderShow = document.createElement("div");
 const main = document.createElement("div");
 const extra = document.createElement("div");
 
-sliderShow.classList.add("col-12", "d-flex", "flex-nowrap", "overflow-hiddens");
+sliderShow.classList.add("col-12", "d-flex", "flex-nowrap", "overflow-hidden");
 main.classList.add("main", "full-width");
 extra.classList.add("extra", "full-width");
 
@@ -47,20 +47,25 @@ function slideJump(steps) {
 }
 
 function animateMain(currentElement, nextElement, animationType) {
-    // extra.innerHTML = "";
+    extra.innerHTML = "";
     extra.append(currentElement);
 
-    // main.innerHTML = "";
+    main.innerHTML = "";
     main.append(nextElement);
 
     main.classList.add("expand-animation");
     extra.classList.add("deplete-animation");
 
     if (animationType == "right") {
-        // sliderShow.innerHTML = "";
+        sliderShow.innerHTML = "";
         sliderShow.append(extra);
         sliderShow.append(main);
+    } else if (animationType == "left") {
+        sliderShow.innerHTML = "";
+        sliderShow.append(main);
+        sliderShow.append(extra);
     }
 }
 
-animateMain(sliderItems[0], sliderItems[1], "right");
+animateMain(sliderItems[2], sliderItems[3], "right");
+// animateMain(sliderItems[0], sliderItems[4], "left");
