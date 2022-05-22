@@ -1,8 +1,3 @@
-// const targetComponents = {
-//     selectedInfoContainer: document.getElementById("selectedItemContainer"),
-//     buttonsContainer: document.getElementById("numBtnContainer"),
-// }
-
 class Animal {
     constructor(name, price, imgUrl) {
         this.name = name;
@@ -21,15 +16,50 @@ const animals = [
 ];
 
 class Controller {
-    static slideJump(inputIndex) {
+    static slideJump(nextIndex) {
         const main = document.getElementById("main");
-        let index = parseInt(main.getAttribute("data-index"));
+        const currentIndex = parseInt(main.getAttribute("data-index"));
 
-        const currentElement = document.createElement("div");
-        currentElement.classList.add("d-flex", "justify-content-center");
+        const currentElement = this.getImgElement(currentIndex);
+        const nextElement = this.getImgElement(nextIndex);
+        const animationType = this.getAnimationType(currentIndex, nextIndex, animals.length);
+
+        this.setNextAnimalInfo(nextIndex);
+        this.animate(currentElement, nextElement, animationType);
+    }
+
+    static getImgElement(index) {
+        const div = document.createElement("div");
+        div.classList.add("d-flex", "justify-content-center");
+
+        const img = document.createElement("img");
+        img.classList.add("col-10", "imgFit");
+        img.src = animals[index].imgUrl;
+
+        div.append(img);
+
+        return div;
+    }
+
+    static getAnimationType(currentIndex, nextIndex, animalsLength) {
 
 
-        animate(currentElement, nextElement, animationType);
+        return undefined;
+    }
+
+    static setNextAnimalInfo(nextIndex) {
+
+
+        const nextAnimalInfoContainer = document.getElementById("nextAnimalInfoContainer");
+        nextAnimalInfoContainer.innerHTML = "";
+
+        const p1 = document.createElement("p");
+        const p2 = document.createElement("p");
+
+        p1.innerText = `Name: ${animals[nextIndex].name}`;
+        p2.innerText = `Price: ${animals[nextIndex].price}`;
+
+        nextAnimalInfoContainer.append(p1, p2);
     }
 
     static animate(currentElement, nextElement, animationType) {
