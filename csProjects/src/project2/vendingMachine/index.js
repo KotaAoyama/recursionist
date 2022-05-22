@@ -19,13 +19,13 @@ class Controller {
     static slideJump(nextIndex) {
         const main = document.getElementById("main");
         const currentIndex = parseInt(main.getAttribute("data-index"));
-
         const currentElement = this.getImgElement(currentIndex);
         const nextElement = this.getImgElement(nextIndex);
         const animationType = this.getAnimationType(currentIndex, nextIndex, animals.length);
 
         this.setNextAnimalInfo(nextIndex);
         this.animate(currentElement, nextElement, animationType);
+        main.setAttribute("data-index", nextIndex);
     }
 
     static getImgElement(index) {
@@ -42,14 +42,10 @@ class Controller {
     }
 
     static getAnimationType(currentIndex, nextIndex, animalsLength) {
-
-
-        return undefined;
+        return nextIndex - currentIndex > 0 ? "right" : "left";
     }
 
     static setNextAnimalInfo(nextIndex) {
-
-
         const nextAnimalInfoContainer = document.getElementById("nextAnimalInfoContainer");
         nextAnimalInfoContainer.innerHTML = "";
 
@@ -108,7 +104,7 @@ class View {
         const buttons = buttonsContainer.querySelectorAll(".btn");
         animals.forEach((animal, i) => {
             buttons[i].addEventListener("click", function () {
-                Controller.slideJump(i + 1);
+                Controller.slideJump(i);
             })
         })
     }
