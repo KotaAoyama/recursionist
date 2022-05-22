@@ -7,6 +7,11 @@ class Animal {
 }
 
 const animals = [
+    new Animal ('Ape', 20, 'https://cdn.pixabay.com/photo/2019/07/24/14/17/monkey-4360298__340.jpg'),
+    new Animal ('Ostrich', 140, 'https://cdn.pixabay.com/photo/2019/09/25/15/58/ostrich-4504017__340.jpg'),
+    new Animal ('Cheetah', 190, 'https://cdn.pixabay.com/photo/2018/06/14/22/22/cheetah-3475778__340.jpg'),
+    new Animal ('Koala', 30, 'https://cdn.pixabay.com/photo/2013/01/14/12/21/koala-74908__340.jpg'),
+    new Animal ('Penguin', 25, 'https://cdn.pixabay.com/photo/2016/09/29/16/40/king-penguin-1703294__340.jpg'),
     new Animal("Tiger", "$100", "https://cdn.pixabay.com/photo/2015/12/18/13/46/tiger-1098607__340.jpg"),
     new Animal("Elephant", "$200", "https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636__480.jpg"),
     new Animal("Parrot", "$30", "https://cdn.pixabay.com/photo/2018/09/22/17/05/parrot-3695678__340.jpg"),
