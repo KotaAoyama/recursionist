@@ -5,10 +5,25 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="target"></div>
-    <script type="text/javascript" src="index.js"></script>
+<div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="col-12 bg-pink d-flex flex-wrap">
+        <div id="slider" class="col-12 p-2 d-flex justify-content-center align-items-center">
+            <div id="sliderShow" class="col-12 d-flex">
+                <div id="main" class="full-width expand-animation" data-index="0"></div>
+                <div id="extra" class="full-width deplete-animation"></div>
+            </div>
+        </div>
+        <div class="col-12 py-2">
+            <div id="selectedInfoContainer"></div>
+            <div id="buttonsContainer">
+                <div class="d-flex flex-wrap col-12 px-0 py-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
