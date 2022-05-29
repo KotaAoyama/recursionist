@@ -58,6 +58,7 @@ class Main{
 
         System.out.println(numList.at(2).data);
         System.out.println(numList.at(3).data);
+        System.out.println(numList.at(4).data);
         System.out.println(numList.findNode(67));
         System.out.println(numList.findNode(767));
 
