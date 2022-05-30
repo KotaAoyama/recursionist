@@ -1,4 +1,4 @@
-package csAdvanced.singlyLinkedList;
+package csAdvanced.singlyLinkedList1;
 
 class Node{
     public int data;
@@ -23,6 +23,7 @@ class SinglyLinkedList{
 
         }
     }
+
     public Node at(int index){
         Node iterator = this.head;
         for(int i=0; i < index; i++){
@@ -41,6 +42,16 @@ class SinglyLinkedList{
             count++;
         }
         return -1;
+    }
+
+    public void printList(){
+        Node iterator = this.head;
+        String str = "";
+        while(iterator != null){
+            str += iterator.data + " ";
+            iterator = iterator.next;
+        }
+        System.out.println(str);
     }
 }
 
@@ -62,5 +73,6 @@ class Main{
         System.out.println(numList.findNode(67));
         System.out.println(numList.findNode(767));
 
+        numList.printList();
     }
 }
