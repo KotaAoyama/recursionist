@@ -1,4 +1,4 @@
-package csAdvanced.singlyLinkedList2;
+package csAdvanced.singlyLinkedList.singlyLinkedList2FindeNode;
 
 class Node{
     public int data;

@@ -1,4 +1,4 @@
-package csAdvanced.singlyLinkedList4;
+package csAdvanced.singlyLinkedList.singlyLinkedList4Insert2;
 
 class Node{
     public int data;

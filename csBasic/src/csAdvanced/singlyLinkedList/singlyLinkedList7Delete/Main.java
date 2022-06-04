@@ -1,4 +1,4 @@
-package csAdvanced.singlyLinkedList7;
+package csAdvanced.singlyLinkedList.singlyLinkedList7Delete;
 
 class Node{
     public int data;

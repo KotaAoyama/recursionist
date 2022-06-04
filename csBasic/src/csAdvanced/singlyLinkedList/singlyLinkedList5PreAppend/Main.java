@@ -1,4 +1,4 @@
-package csAdvanced.singlyLinkedList5;
+package csAdvanced.singlyLinkedList.singlyLinkedList5PreAppend;
 
 class Node{
     public int data;
