@@ -56,8 +56,26 @@ class SinglyLinkedList{
         iterator.next = iterator.next.next;
     }
 
-    // ここから開発してください。
+    public void reverse(){
+        if(this.head == null || this.head.next == null) return;
 
+        // オブジェクトなので、=は実際の値を格納しているわけではなく、メモリアドレスを指している点に十分注意ください。
+        // A -> B -> C を、C -> B -> Aに変更する場合は、向きに少し混乱するのでゆっくり解読しましょう。
+        Node reverse = this.head;
+        this.head = this.head.next;
+        reverse.next = null;
+
+        while(this.head != null){
+            // =はメモリアドレスを指します。紙に書いてロジックを確認しましょう。
+            Node temp = this.head;
+            this.head = this.head.next;
+            temp.next = reverse;
+            reverse = temp;
+        }
+        // 処理が終わったら、headのnextを反転したリストを含むtempHeadに割り当てましょう。
+
+        this.head = reverse;
+    }
 
     public void printList(){
         Node iterator = this.head;
@@ -77,7 +95,8 @@ class Main{
         int[] arr = new int[]{35,23,546,67,86,234,56,767,34,1,98,78,555};
         SinglyLinkedList numList = new SinglyLinkedList(arr);
 
-        // 逆側に表示してみましょう。
-
+        numList.printList();
+        numList.reverse();
+        numList.printList();
     }
 }
