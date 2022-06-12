@@ -1,11 +1,13 @@
 package csAdvanced.stack.expressionAnalysis;
 
-import java.util.*;
+import java.util.Stack;
+import java.util.Map;
+import java.util.HashMap;
 
 class Solution {
     public static long expressionParser(String expression) {
-        Deque<String> nums = new ArrayDeque<>(); // 数字を入れるためのスタック
-        Deque<String> ops = new ArrayDeque<>(); // 演算子を入れるためのスタック
+        Stack<String> nums = new Stack<>(); // 数字を入れるためのスタック
+        Stack<String> ops = new Stack<>(); // 演算子を入れるためのスタック
 
         for (int i = 0; i < expression.length(); i++) {
             // 演算子が来たときの処理
@@ -43,7 +45,7 @@ class Solution {
     }
 
     // スタックから数字を取り出し、受け取った演算子で計算する関数
-    public static void process(Deque<String> stack, String op) {
+    public static void process(Stack<String> stack, String op) {
         // 数字のスタックから文字列を取り出し数字にします。
         long right = Long.parseLong(stack.pop());
         long left = Long.parseLong(stack.pop());
@@ -70,7 +72,7 @@ class Solution {
 
     // 演算子の優先順位を返す関数
     public static int getPriority(String op) {
-        HashMap<String, Integer> map = new HashMap<>() {
+        Map<String, Integer> map = new HashMap<>() {
             {
                 put("*", 2);
                 put("/", 2);
@@ -85,17 +87,17 @@ class Solution {
 
 public class Main {
     public static void main(String[] args) {
-//        System.out.println(Solution.expressionParser("2+4*6")); // 26
-//        System.out.println(Solution.expressionParser("2*3+4")); // 10
-//        System.out.println(Solution.expressionParser("3-3+3")); // 3
-//        System.out.println(Solution.expressionParser("2+2+2")); // 6
-//        System.out.println(Solution.expressionParser("1-1-1")); // -1
-//        System.out.println(Solution.expressionParser("3*3/3*3*3")); // 27
-//        System.out.println(Solution.expressionParser("14/3*2")); // 8
-//        System.out.println(Solution.expressionParser("12/3*4")); // 16
-//        System.out.println(Solution.expressionParser("1+2+3+4+5+6+7+8+9+10")); // 55
-//        System.out.println(Solution.expressionParser("1+2*5/3+6/4*2")); // 6
-//        System.out.println(Solution.expressionParser("42")); // 42
+        System.out.println(Solution.expressionParser("2+4*6")); // 26
+        System.out.println(Solution.expressionParser("2*3+4")); // 10
+        System.out.println(Solution.expressionParser("3-3+3")); // 3
+        System.out.println(Solution.expressionParser("2+2+2")); // 6
+        System.out.println(Solution.expressionParser("1-1-1")); // -1
+        System.out.println(Solution.expressionParser("3*3/3*3*3")); // 27
+        System.out.println(Solution.expressionParser("14/3*2")); // 8
+        System.out.println(Solution.expressionParser("12/3*4")); // 16
+        System.out.println(Solution.expressionParser("1+2+3+4+5+6+7+8+9+10")); // 55
+        System.out.println(Solution.expressionParser("1+2*5/3+6/4*2")); // 6
+        System.out.println(Solution.expressionParser("42")); // 42
         System.out.println(Solution.expressionParser("7*3622*636*2910*183+343/2926/1026")); // 8587122934320
     }
 }
