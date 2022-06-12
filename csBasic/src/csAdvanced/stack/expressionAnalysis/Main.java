@@ -1,104 +1,101 @@
 package csAdvanced.stack.expressionAnalysis;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-class Node<E>{
-    public E data;
-    public Node<E> next;
-
-    public Node(E data){
-        this.data = data;
-        this.next = null;
-    }
-}
-
-class Stack<E> {
-    public Node<E> head;
-
-    public Stack(){
-        this.head = null;
-    }
-
-    public void push(E data){
-        Node<E> temp = this.head;
-        this.head = new Node<E>(data);
-        this.head.next = temp;
-    }
-
-    public E pop(){
-        if (this.head == null) return null;
-        Node<E> temp = this.head;
-        this.head = this.head.next;
-        return temp.data;
-    }
-
-    public E peek(){
-        if (this.head == null) return null;
-        return this.head.data;
-    }
-}
+import java.util.*;
 
 class Solution {
     public static long expressionParser(String expression) {
+        Deque<String> nums = new ArrayDeque<>(); // 数字を入れるためのスタック
+        Deque<String> ops = new ArrayDeque<>(); // 演算子を入れるためのスタック
 
-        List<Long> operandList = Arrays.stream(expression.split("[+\\-*/]"))
-                .map(Long::parseLong)
-                .collect(Collectors.toList());
-        List<String> operatorList = Arrays.stream(expression.split("\\d"))
-                .filter(str -> !str.equals(""))
-                .collect(Collectors.toList());
-
-        Stack<Long> operandStack = new Stack<>();
-        Stack<String> operatorStack = new Stack<>();
-
-        operandStack.push(operandList.remove(0));
-
-        while(operatorList.size() > 0 && operandList.size() > 0) {
-            operatorStack.push(operatorList.remove(0));
-            operandStack.push(operandList.remove(0));
-
-            if (operatorStack.peek().equals("*") || operatorStack.peek().equals("/")) {
-                long y = operandStack.pop();
-                long x = operandStack.pop();
-                String operator = operatorStack.pop();
-                operandStack.push(calculate(x, y, operator));
+        for (int i = 0; i < expression.length(); i++) {
+            // 演算子が来たときの処理
+            if (!Character.isDigit(expression.charAt(i))) {
+                String currOP = expression.charAt(i) + "";
+                // 現在の演算子とスタックに入っている演算子の優先順位を比較します。
+                // スタックに入っている演算子の方が優先順位が高い時は先に計算します。
+                while (!ops.isEmpty() && getPriority(currOP) <= getPriority(ops.peek())) {
+                    process(nums, ops.pop());
+                }
+                // 現在の演算子をスタックに入れます。
+                ops.push(currOP);
+            }
+            // 数字が来たときの処理 ここでは文字列として扱います。
+            else {
+                String number = "";
+                // 2桁以上の数字に対応するため、演算子がくるまで文字を結合していきます。
+                while (i < expression.length() && Character.isDigit(expression.charAt(i))) {
+                    number += expression.charAt(i);
+                    i++;
+                }
+                i--; // 最後に増やしたiを1つ戻しておきます。
+                nums.push(number);
             }
         }
 
-        Stack<Long> operandStack2 = new Stack<>();
-        Stack<String> operatorStack2 = new Stack<>();
-        while(operandStack.peek() != null) operandStack2.push(operandStack.pop());
-        while(operatorStack.peek() != null) operatorStack2.push(operatorStack.pop());
+        // 演算子のスタックが空になるまでprocessを呼び出して計算を続けます。
+        while (!ops.isEmpty()) {
+            process(nums, ops.pop());
 
-        while(operatorStack2.peek() != null) {
-            long x = operandStack2.pop();
-            long y = operandStack2.pop();
-            String operator = operatorStack2.pop();
-            operandStack2.push(calculate(x, y, operator));
         }
-
-        return operandStack2.peek();
+        // 数字のスタックの先頭に答えが入っています。
+        // =====Long.parseLongで文字列をlong型の数値に変更=====
+        return Long.parseLong(nums.peek());
     }
 
-    private static long calculate(long x, long y, String operator) {
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(operator);
+    // スタックから数字を取り出し、受け取った演算子で計算する関数
+    public static void process(Deque<String> stack, String op) {
+        // 数字のスタックから文字列を取り出し数字にします。
+        long right = Long.parseLong(stack.pop());
+        long left = Long.parseLong(stack.pop());
 
-        switch (operator) {
-            case "+": return x + y;
-            case "-": return x - y;
-            case "*": return x * y;
-            case "/": return (long) x / y;
-            default: return 0;
+        long value = 0;
+
+        switch (op) {
+            case "+":
+                value = left + right;
+                break;
+            case "-":
+                value = left - right;
+                break;
+            case "*":
+                value = left * right;
+                break;
+            case "/":
+                value = (int) Math.floor(left / right);
+                break;
         }
+        // 計算した結果は、次の演算子での計算のため再度スタックに入れます。
+        stack.push(value + "");
+    }
+
+    // 演算子の優先順位を返す関数
+    public static int getPriority(String op) {
+        HashMap<String, Integer> map = new HashMap<>() {
+            {
+                put("*", 2);
+                put("/", 2);
+                put("+", 1);
+                put("-", 1);
+            }
+        };
+        int result = map.getOrDefault(op, 0);
+        return result;
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Solution.expressionParser("3-3+3"));
+//        System.out.println(Solution.expressionParser("2+4*6")); // 26
+//        System.out.println(Solution.expressionParser("2*3+4")); // 10
+//        System.out.println(Solution.expressionParser("3-3+3")); // 3
+//        System.out.println(Solution.expressionParser("2+2+2")); // 6
+//        System.out.println(Solution.expressionParser("1-1-1")); // -1
+//        System.out.println(Solution.expressionParser("3*3/3*3*3")); // 27
+//        System.out.println(Solution.expressionParser("14/3*2")); // 8
+//        System.out.println(Solution.expressionParser("12/3*4")); // 16
+//        System.out.println(Solution.expressionParser("1+2+3+4+5+6+7+8+9+10")); // 55
+//        System.out.println(Solution.expressionParser("1+2*5/3+6/4*2")); // 6
+//        System.out.println(Solution.expressionParser("42")); // 42
+        System.out.println(Solution.expressionParser("7*3622*636*2910*183+343/2926/1026")); // 8587122934320
     }
 }
