@@ -1,4 +1,4 @@
-package csAdvanced.stack.queue;
+package csAdvanced.queue.queue;
 
 class Node{
     public int data;
