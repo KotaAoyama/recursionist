@@ -1,7 +1,6 @@
-package csAdvanced.queue.dequeue3;
+package csAdvanced.queue.deque3;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class Node{
     public int data;
