@@ -1,4 +1,4 @@
-package csAdvanced.dataStructureIntroduction.queue.diceStreakGamble;
+package csAdvanced.dataStructureIntroduction.stack.diceStreakGamble;
 
 import java.util.Stack;
 
@@ -16,7 +16,7 @@ class Solution {
 
             for (int j = 1; j < players[i].length; j++) {
                 if (stack.peek() > players[i][j]) {
-                    stack.clear();
+                    while(!stack.empty()) stack.pop();
                     currentPlayerFromIndex = j;
                 }
                 stack.push(players[i][j]);

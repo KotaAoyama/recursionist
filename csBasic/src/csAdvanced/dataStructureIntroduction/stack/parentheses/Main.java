@@ -1,4 +1,4 @@
-package csAdvanced.dataStructureIntroduction.queue.parentheses;
+package csAdvanced.dataStructureIntroduction.stack.parentheses;
 
 import java.util.*;
 
