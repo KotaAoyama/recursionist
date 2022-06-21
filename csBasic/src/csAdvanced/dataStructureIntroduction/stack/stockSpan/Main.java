@@ -1,6 +1,7 @@
 package csAdvanced.dataStructureIntroduction.stack.stockSpan;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Deque; // インターフェース
 import java.util.ArrayDeque; // スタックとして使う両端キュー
@@ -8,7 +9,7 @@ import java.util.ArrayDeque; // スタックとして使う両端キュー
 public class Main{
     public static int[] stockSpan(int[] stocks){
         Deque<Integer> stack = new ArrayDeque<>();
-        ArrayList<Integer> dResults = new ArrayList<>();
+        List<Integer> dResults = new ArrayList<>();
 
         for(int i = 0; i < stocks.length; i++) {
             int current = stocks[i];
@@ -27,6 +28,21 @@ public class Main{
         }
         return results;
     }
+
+//    public static int[] stockSpan(int[] stocks){
+//        int[] resArr = new int[stocks.length];
+//
+//        for (int i = 0; i < stocks.length; i++) {
+//            int count = 0;
+//            for (int j = 0; j <= i; j++) {
+//                if (stocks[i] >= stocks[j]) count++;
+//                else count = 0;
+//            }
+//            resArr[i] = count;
+//        }
+//
+//        return resArr;
+//    }
 
     public static void main(String[] args){
         System.out.println(Arrays.toString(stockSpan(new int[]{30,50,60,20,30,64,80}))); // [1,2,3,1,2,6,7]
