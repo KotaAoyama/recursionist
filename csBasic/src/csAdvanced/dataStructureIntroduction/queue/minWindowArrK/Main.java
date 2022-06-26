@@ -10,31 +10,32 @@ class Solution{
 
         Deque<Integer> deque = new ArrayDeque<>();
 
-        // dequeの初期化
+        // サイズKのウィンドウを作ります。
         for (int i=0; i < k; i++){
-            // 新しい値と既存の値を比較して、新しい値以上の既存の値は全て削除するので、dequeの末尾は新しい値より小さい値になります。
-            // dequeの末尾は最小値です。(新しい値より小さいので削除されないから。)
-            while(deque.peekLast() != null && intArr[deque.peekLast()] >= intArr[i]){
-                deque.removeLast();
+            // 新しい値とdequeの最後尾の値を比較して、新しい値より大きい値は全て削除します。
+            while(!deque.isEmpty() && intArr[deque.peekLast()] >= intArr[i]){
+                // pollLast()は後ろから削除します。
+                deque.pollLast();
             }
+            // 新しい値をdequeに入れます。
             deque.addLast(i);
-
         }
 
+        // Kからスタートし、残りの要素をウィンドウへ入れていきます。
         for(int i=k; i < intArr.length; i++){
-            // dequeの先頭は最小値
+            // 先頭の値をresultsにpushします。先頭はサイズkのウィンドウの中で最小値になっています。
             results.add(intArr[deque.peekFirst()]);
-
-            // ウィンドウ外にある要素は取り除きます。
-            while(deque.peekFirst() != null && deque.peekFirst() <= i-k) deque.removeFirst();
-            // 現在の値とそれより大きい全てのdequeの値をチェック
-            while(deque.peekLast() != null && intArr[deque.peekLast()] >= intArr[i]) deque.removeLast();
+            // ウィンドウの左端からはみ出た要素は取り除きます。pop()は先頭を削除します。
+            while(!deque.isEmpty() && deque.peekFirst() <= i-k) deque.pop();
+            // 新しい値とdequeの最後尾を比較します。新しい値より大きい値はdequeから削除します。
+            while(!deque.isEmpty() && intArr[deque.peekLast()] >= intArr[i]) deque.pollLast();
+            // 新しい値をdequeに入れます。
             deque.addLast(i);
         }
 
-        // 最後のmin
+        // 最後のウィンドウの分の最小値をresultsに追加します。
         results.add(intArr[deque.peekFirst()]);
-
+        // 固定配列に変換
         int[] resultArr = new int[results.size()];
         for (int i = 0; i < results.size(); i++) resultArr[i] = results.get(i);
 
