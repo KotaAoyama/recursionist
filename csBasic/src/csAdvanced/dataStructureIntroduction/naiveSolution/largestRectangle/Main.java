@@ -2,29 +2,26 @@ package csAdvanced.dataStructureIntroduction.naiveSolution.largestRectangle;
 
 public class Main{
     public static int largestRectangle(int[] h){
-        int[] results = new int[h.length];
-
-        // nested for loops, O(n^2)
+        int[] tempMaxArr = new int[h.length];
         for (int i = 0; i < h.length; i++) {
-            int j = i - 1;
-            int total = 1;
-            int curr = h[i];
-            while (j >= 0 && curr <= h[j]) {
-                total += 1;
-                j -= 1;
+            int maxWidth = 1;
+            for (int j = i+1; j < h.length; j++) {
+                if (h[j] >= h[i]) maxWidth++;
+                else break;
             }
-            j = i + 1;
-            while (j < h.length && curr <= h[j]) {
-                total += 1;
-                j += 1;
+            for (int j = i-1; j >= 0; j--) {
+                if (h[j] >= h[i]) maxWidth++;
+                else break;
             }
-            results[i] = total * curr;
+            tempMaxArr[i] = h[i] * maxWidth;
         }
-        int maxValue = 0;
-        for(Integer num: results) {
-            maxValue = Math.max(num, maxValue);
+
+        int max = Integer.MIN_VALUE;
+        for (int tempMax : tempMaxArr) {
+            if (max < tempMax) max = tempMax;
         }
-        return maxValue;
+
+        return max;
     }
 
     public static void main(String[] args){
