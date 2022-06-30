@@ -6,8 +6,8 @@ import java.util.Deque;
 public class Main{
     public static int[] stackCounter(int[] arr) {
 
-        Deque<Integer> stack = new ArrayDeque<>(); // 両端キュー
-        int[] results = new int[arr.length]; // 配列
+        Deque<Integer> stack = new ArrayDeque<>();
+        int[] results = new int[arr.length];
         int i = 0;
         for (Integer x: arr) {
             int total = 1;
