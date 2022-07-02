@@ -1,4 +1,4 @@
-package csAdvanced.dataStructureIntroduction.binaryTree;
+package csAdvanced.dataStructureIntroduction.binaryTree.binaryTree1;
 
 class BinaryTree{
     public int data;
