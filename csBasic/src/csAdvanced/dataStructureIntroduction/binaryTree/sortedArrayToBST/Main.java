@@ -1,4 +1,4 @@
-package csAdvanced.dataStructureIntroduction.binaryTree.binaryTree2;
+package csAdvanced.dataStructureIntroduction.binaryTree.sortedArrayToBST;
 
 class BinaryTree{
     public int data;
