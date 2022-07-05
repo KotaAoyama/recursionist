@@ -37,19 +37,34 @@ public class Main{
 
     // BSTリストの中にキーが存在かどうかによって、true、falseを返します。
     // 再帰
-    public static boolean keyExists(int key, BinaryTree bst){
+    public static boolean keyExistRecursiveVer(int key, BinaryTree bst){
         if(bst == null) return false;
         if(bst.data == key) return true;
 
         // 現在のノードよりキーが小さければ左に、大きければ右に辿ります。
-        if(bst.data > key) return keyExists(key, bst.left);
-        else return keyExists(key, bst.right);
+        if(bst.data > key) return keyExistRecursiveVer(key, bst.left);
+        else return keyExistRecursiveVer(key, bst.right);
+    }
+    // loop
+    public static boolean keyExistLoopVer(int key, BinaryTree bst){
+        BinaryTree iterator = bst;
+        while(iterator != null){
+            if(iterator.data == key) return true;
+            // 現在のノードよりキーが小さければ左に、大きければ右に辿ります。
+            if(iterator.data > key) iterator = iterator.left;
+            else iterator = iterator.right;
+        }
+
+        return false;
     }
 
     public static void main(String[] args){
         BinaryTree balancedBST = sortedArrayToBST(new int[]{1,2,3,4,5,6,7,8,9,10,11});
-        System.out.println(keyExists(6, balancedBST));
-        System.out.println(keyExists(10, balancedBST));
-        System.out.println(keyExists(45, balancedBST));
+        System.out.println(keyExistRecursiveVer(6, balancedBST));
+        System.out.println(keyExistRecursiveVer(10, balancedBST));
+        System.out.println(keyExistRecursiveVer(45, balancedBST));
+        System.out.println(keyExistLoopVer(6, balancedBST));
+        System.out.println(keyExistLoopVer(10, balancedBST));
+        System.out.println(keyExistLoopVer(45, balancedBST));
     }
 }
