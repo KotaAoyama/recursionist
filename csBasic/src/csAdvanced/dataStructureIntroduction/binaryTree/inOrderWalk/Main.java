@@ -48,7 +48,7 @@ class BinarySearchTree<E> {
     }
 
     private BinaryTree<E> sortedArrayToBSTHelper(int[] arr, int start, int end) {
-        if (start == end) return new BinaryTree<E>(arr[start], null, null);
+        if (start == end) return new BinaryTree<>(arr[start], null, null);
 
         int mid = (int) Math.floor((start + end) / 2);
 
