@@ -2,10 +2,10 @@ package csAdvanced.dataStructureIntroduction.binaryTree.inOrderWalk;
 
 import java.util.Arrays;
 
-class BinaryTree<Integer> {
+class BinaryTree<E> {
     private final int data;
-    private final BinaryTree<Integer> left;
-    private final BinaryTree<Integer> right;
+    private final BinaryTree<E> left;
+    private final BinaryTree<E> right;
 
     public BinaryTree(int data) {
         this.data = data;
@@ -13,7 +13,7 @@ class BinaryTree<Integer> {
         this.right = null;
     }
 
-    public BinaryTree(int data, BinaryTree<Integer> left, BinaryTree<Integer> right) {
+    public BinaryTree(int data, BinaryTree<E> left, BinaryTree<E> right) {
         this.data = data;
         this.left = left;
         this.right = right;
@@ -24,41 +24,41 @@ class BinaryTree<Integer> {
         System.out.println("");
     }
 
-    public void inOrderWalk(BinaryTree<Integer> root) {
+    public void inOrderWalk(BinaryTree<E> root) {
         if (root != null) {
             this.inOrderWalk(root.left);
-            System.out.println(root.data);
+            System.out.print(root.data + " ");
             this.inOrderWalk(root.right);
         }
     }
 }
 
-class BinarySearchTree<Integer> {
+class BinarySearchTree<E> {
 
-    private BinaryTree<Integer> root;
+    private BinaryTree<E> root;
 
     public BinarySearchTree(int[] arr) {
         Arrays.sort(arr);
         this.root = sortedArrayToBST(arr);
     }
 
-    private BinaryTree<Integer> sortedArrayToBST(int[] arr) {
+    private BinaryTree<E> sortedArrayToBST(int[] arr) {
         if (arr.length == 0) return null;
         return sortedArrayToBSTHelper(arr, 0, arr.length - 1);
     }
 
-    private BinaryTree<Integer> sortedArrayToBSTHelper(int[] arr, int start, int end) {
-        if (start == end) return new BinaryTree<Integer>(arr[start], null, null);
+    private BinaryTree<E> sortedArrayToBSTHelper(int[] arr, int start, int end) {
+        if (start == end) return new BinaryTree<E>(arr[start], null, null);
 
         int mid = (int) Math.floor((start + end) / 2);
 
-        BinaryTree<Integer> left = null;
+        BinaryTree<E> left = null;
         if (mid - 1 >= start) left = sortedArrayToBSTHelper(arr, start, mid - 1);
 
-        BinaryTree<Integer> right = null;
+        BinaryTree<E> right = null;
         if (mid + 1 <= end) right = sortedArrayToBSTHelper(arr, mid + 1, end);
 
-        BinaryTree<Integer> root = new BinaryTree<Integer>(arr[mid], left, right);
+        BinaryTree<E> root = new BinaryTree<>(arr[mid], left, right);
         return root;
     }
 
