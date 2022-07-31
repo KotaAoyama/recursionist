@@ -1,4 +1,4 @@
-package csAdvanced.dataStructureIntroduction.binaryTree.reverseOrder;
+package csAdvanced.dataStructureIntroduction.binaryTree.reverseOrderWalk;
 
 import java.util.Arrays;
 
