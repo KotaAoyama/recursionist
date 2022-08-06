@@ -1,4 +1,4 @@
-package csAdvanced.dataStructureIntroduction.deleteNode;
+package csAdvanced.dataStructureIntroduction.binaryTree.deleteNode;
 
 import java.util.Arrays;
 
