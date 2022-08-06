@@ -102,6 +102,8 @@ class Main{
         balancedBST.printSorted();
         balancedBST.insert(47);
         balancedBST.printSorted();
+        balancedBST.insert(0);
+        balancedBST.printSorted();
         balancedBST.insert(811);
         balancedBST.printSorted();
     }
