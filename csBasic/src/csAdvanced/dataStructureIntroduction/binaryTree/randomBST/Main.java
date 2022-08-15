@@ -101,6 +101,5 @@ class Main {
         BinarySearchTree balancedBST2 = new BinarySearchTree(list2);
         balancedBST2.printSorted();
         System.out.println("MaxDepth: " + BinarySearchTree.maximumDepth(balancedBST2.root));
-
     }
 }
