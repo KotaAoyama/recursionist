@@ -15,23 +15,23 @@ class BinaryTree<E>{
 
     }
 
-    public void printInOrder(){
+    void printInOrder(){
         this.inOrderWalk(this);
         System.out.println("");
     }
 
-    public void printPreOrder(){
+    void printPreOrder(){
         this.preOrderWalk(this);
         System.out.println("");
     }
 
-    public void printPostOrder(){
+    void printPostOrder(){
         this.postOrderWalk(this);
         System.out.println("");
     }
 
     // 間順 (in-order) (LNR)
-    public void inOrderWalk(BinaryTree<E> tRoot){
+    void inOrderWalk(BinaryTree<E> tRoot){
         if(tRoot!=null){
             this.inOrderWalk(tRoot.left);
             System.out.print(tRoot.data + " ");
@@ -40,7 +40,7 @@ class BinaryTree<E>{
     }
 
     // 前順（pre-order）（NLR）
-    public void preOrderWalk(BinaryTree<E> tRoot){
+    void preOrderWalk(BinaryTree<E> tRoot){
         if(tRoot!=null){
             System.out.print(tRoot.data + " ");
             this.preOrderWalk(tRoot.left);
@@ -49,7 +49,7 @@ class BinaryTree<E>{
     }
 
     // 後順（post-order）（LRN）
-    public void postOrderWalk(BinaryTree<E> tRoot){
+    void postOrderWalk(BinaryTree<E> tRoot){
         if(tRoot!=null){
             this.postOrderWalk(tRoot.left);
             this.postOrderWalk(tRoot.right);
@@ -84,7 +84,7 @@ class BinarySearchTree<E>{
         return root;
     }
 
-    public boolean keyExist(int key){
+    boolean keyExist(int key){
         BinaryTree<E> iterator = this.root;
         while(iterator != null){
             if(iterator.data == key) return true;
@@ -94,7 +94,7 @@ class BinarySearchTree<E>{
         return false;
     }
 
-    public BinaryTree<E> search(int key){
+    BinaryTree<E> search(int key){
         BinaryTree<E> iterator = this.root;
         while(iterator != null){
             if(iterator.data == key) return iterator;
@@ -104,7 +104,7 @@ class BinarySearchTree<E>{
         return null;
     }
 
-    public void printSorted(){
+    void printSorted(){
         this.root.printPostOrder();
     }
 }
