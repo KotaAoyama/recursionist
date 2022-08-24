@@ -1,20 +1,32 @@
 package csAdvanced.dataStructureIntroduction.heap.maxHeapify;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 class Heap {
-    public static int left(int i) {
+    private final List<Integer> arr;
+
+    Heap(List<Integer> arr) {
+        this.arr = arr;
+    }
+
+    int left(int i) {
         return 2*i + 1;
     }
 
-    public static int right(int i) {
+    int right(int i) {
         return 2*i + 2;
     }
 
-    public static void maxHeapify(List<Integer> arr, int i) {
+    void printArr() {
+        System.out.println(arr);
+    }
 
-        int l = Heap.left(i);
-        int r = Heap.right(i);
+    void maxHeapify(int i) {
+
+        int l = left(i);
+        int r = right(i);
 
         int biggest = i;
         if(l < arr.size() && arr.get(l) > arr.get(biggest)) biggest = l;
@@ -24,7 +36,22 @@ class Heap {
             int temp = arr.get(i);
             arr.set(i, arr.get(biggest));
             arr.set(biggest, temp);
-            Heap.maxHeapify(arr, biggest);
+            maxHeapify(biggest);
         }
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+
+        Heap heap1 = new Heap(new ArrayList<>(Arrays.asList(2,42,11,30,10,7,6,5,9)));
+        heap1.printArr();
+        heap1.maxHeapify(1);// 根ノードが2で、2 < 42のため、最大ヒープではない。
+        heap1.printArr();
+
+        Heap heap2 = new Heap(new ArrayList<>(Arrays.asList(56,4,51,10,12,5,12,4,6,5)));
+        heap2.printArr();
+        heap2.maxHeapify(1);// インデックス1が4で、4 < 10のため、最大ヒープではない。
+        heap2.printArr();
     }
 }
