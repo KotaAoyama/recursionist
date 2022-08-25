@@ -19,11 +19,13 @@ class Heap {
         return 2*i + 2;
     }
 
+    int parent(int i) { return (int)Math.floor((i-1)/2); }
+
     void printArr() {
         System.out.println(arr);
     }
 
-    void maxHeapify(int i) {
+    private void maxHeapify(int i) {
 
         int l = left(i);
         int r = right(i);
@@ -39,19 +41,26 @@ class Heap {
             maxHeapify(biggest);
         }
     }
+
+    void buildMaxHeap() {
+        int middle = parent(arr.size()-1);
+        for (int j = middle; j >= 0; j--) {
+            maxHeapify(j);
+        }
+    }
 }
 
 class Main {
     public static void main(String[] args) {
 
         Heap heap1 = new Heap(new ArrayList<>(Arrays.asList(2,42,11,30,10,7,6,5,9)));
-        heap1.printArr();
-        heap1.maxHeapify(1);// 根ノードが2で、2 < 42のため、最大ヒープではない。
-        heap1.printArr();
+        heap1.printArr();// 根ノードが2で、2 < 42のため、最大ヒープではない。
+        heap1.buildMaxHeap();//　根ノードが最大値となり木全体が最大ヒープになる。
+        heap1.printArr();// 42, 30, 11, 9, 10, 7, 6, 5, 2
 
         Heap heap2 = new Heap(new ArrayList<>(Arrays.asList(56,4,51,10,12,5,12,4,6,5)));
-        heap2.printArr();
-        heap2.maxHeapify(1);// インデックス1が4で、4 < 10のため、最大ヒープではない。
-        heap2.printArr();
+        heap2.printArr();// インデックス1が4で、4 < 10のため、最大ヒープではない。
+        heap2.buildMaxHeap();//　根ノードが最大値となり木全体が最大ヒープになる。
+        heap2.printArr();// 56, 12, 51, 10, 5, 5, 12, 4, 6, 4
     }
 }
