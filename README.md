@@ -1,1 +1,1 @@
-# recursionist
+# プログラミング学習サービスRecursionの学習記録です
